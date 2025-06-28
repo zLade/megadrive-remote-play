@@ -70,7 +70,7 @@ Automate button presses on a **Sega Mega Drive / Genesis 6‑button controller
 | ------ | -------- | -------------- | -------------------- |
 | `POST` | `/down`  | `btn=A`        | Hold button          |
 | `POST` | `/up`    | `btn=A`        | Release button       |
-| `POST` | `/tap`   | `btn=A&ms=100` | Quick press (100 ms) |
+
 
 Buttons are case‑insensitive (`a`, `B`, `start`, …).
 
