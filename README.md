@@ -108,9 +108,4 @@ MIT License — see [`LICENSE`](LICENSE) for details.
 
 ---
 
-### Credits
-
-* [ULN2803A datasheet](https://www.ti.com/lit/ds/symlink/uln2803a.pdf)
-* 6‑button protocol reference: [segaretro.org](https://segaretro.org/Six_Button_Controller)
-
 > *Made with \:heart: for accessibility, tool‑assisted runs, and weird hardware hacks.*
