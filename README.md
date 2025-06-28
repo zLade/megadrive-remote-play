@@ -56,7 +56,7 @@ Remotely play on a **Sega Mega Drive / Genesis** with a ***6‑button controll
 3. Tin each pad and solder a thin wire—**one per button plus one common GND**.
 4. Route the wires out through a strain‑relieved hole.
 
-<center><img src="https://raw.githubusercontent.com/zLade/megadrive-remote-play/refs/heads/main/images/gpio-breadboard-pcb.jpg" width="512" height="256"></center>
+<center><img src="https://raw.githubusercontent.com/zLade/megadrive-remote-play/refs/heads/main/images/gpio-breadboard-pcb.jpg" width="512" height="512"></center>
 
 ---
 
