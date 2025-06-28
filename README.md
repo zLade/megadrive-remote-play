@@ -29,22 +29,21 @@ Automate button presses on a **Sega Mega Drive / Genesis 6‑button controller
 
 ### Pin Map (default)
 
-+--------+---------+--------+----------------+
-| Button | Pi GPIO | ULN IN | ULN OUT → Pad  |
-+--------+---------+--------+----------------+
-| Up     | 5       | 0      | Up trace       |
-| Down   | 6       | 1      | Down trace     |
-| Left   | 13      | 2      | Left trace     |
-| Right  | 19      | 3      | Right trace    |
-| A      | 12      | 4      | A pad          |
-| B      | 16      | 5      | B pad          |
-| C      | 20      | 6      | C pad          |
-| Start  | 21      | 7      | Start pad      |
-| X      | 22      | 0 (U2) | X pad          |
-| Y      | 23      | 1 (U2) | Y pad          |
-| Z      | 24      | 2 (U2) | Z pad          |
-| Mode   | 25      | 3 (U2) | Mode pad       |
-+--------+---------+--------+----------------+
+| Button | Pi GPIO | ULN IN | ULN OUT → Pad |
+| ------ | ------- | ------ | ------------- |
+| Up     | 5       | U1‑0   | Up trace      |
+| Down   | 6       | U1‑1   | Down trace    |
+| Left   | 13      | U1‑2   | Left trace    |
+| Right  | 19      | U1‑3   | Right trace   |
+| A      | 12      | U1‑4   | A pad         |
+| B      | 16      | U1‑5   | B pad         |
+| C      | 20      | U1‑6   | C pad         |
+| Start  | 21      | U1‑7   | Start pad     |
+| X      | 22      | U2‑0   | X pad         |
+| Y      | 23      | U2‑1   | Y pad         |
+| Z      | 24      | U2‑2   | Z pad         |
+| Mode   | 25      | U2‑3   | Mode pad      |
+
 
 ---
 
