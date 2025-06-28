@@ -31,18 +31,18 @@ Automate button presses on a **Sega Mega Drive / Genesis 6‑button controller
 
 | Button | Pi GPIO | ULN IN | ULN OUT → Pad |
 | ------ | ------- | ------ | ------------- |
-| Up     | 5       | U1‑1   | Up trace      |
-| Down   | 6       | U1‑2   | Down trace    |
-| Left   | 13      | U1‑3   | Left trace    |
-| Right  | 19      | U1‑4   | Right trace   |
-| A      | 12      | U2‑1   | A pad         |
-| B      | 16      | U2‑2   | B pad         |
-| C      | 20      | U2‑3   | C pad         |
-| Start  | 21      | U2‑4   | Start pad     |
-| X      | 22      | U2‑5   | X pad         |
-| Y      | 23      | U2‑6   | Y pad         |
-| Z      | 24      | U2‑7   | Z pad         |
-| Mode   | 25      | U2‑8   | Mode pad      |
+| Up     | 5       | U1‑1   | Up            |
+| Down   | 6       | U1‑2   | Down          |
+| Left   | 13      | U1‑3   | Left          |
+| Right  | 19      | U1‑4   | Right         |
+| A      | 12      | U2‑1   | A             |
+| B      | 16      | U2‑2   | B             |
+| C      | 20      | U2‑3   | C             |
+| Start  | 21      | U2‑4   | Start         |
+| X      | 22      | U2‑5   | X             |
+| Y      | 23      | U2‑6   | Y             |
+| Z      | 24      | U2‑7   | Z             |
+| Mode   | 25      | U2‑8   | Mode          |
 
 
 ---
