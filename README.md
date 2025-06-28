@@ -1,6 +1,6 @@
 # Megadrive-remote-play
 
-Automate button presses on a **Sega Mega Drive / Genesis 6‑button controller** using a Raspberry Pi and an **ULN2803A Darlington transistor array**. No need to reverse‑engineer the DB‑9 protocol—the Pi simply "presses" the physical pads for you.
+Remotely play on a **Sega Mega Drive / Genesis** with a ***6‑button controller** using a Raspberry Pi and an **ULN2803A**. No need to reverse‑engineer the DB‑9 protocol—the Pi simply "presses" the physical pads for you.
 
 ---
 
