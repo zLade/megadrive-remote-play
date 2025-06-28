@@ -109,7 +109,7 @@ sudo node server.js
 
 It's use the native Gamepad API from modern web browser so it will automaticaly detect your controller
 
-<center><img src="https://raw.githubusercontent.com/zLade/megadrive-remote-play/refs/heads/main/images/web-interface-mapping.png" width="512" height="256"></center>
+<center><img src="https://raw.githubusercontent.com/zLade/megadrive-remote-play/refs/heads/main/images/web-interface-mapping.png" width="512" height="512"></center>
 <center><img src="https://raw.githubusercontent.com/zLade/megadrive-remote-play/refs/heads/main/images/web-interface-controller.png" width="512" height="256"></center>
 
 
