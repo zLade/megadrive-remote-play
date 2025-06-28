@@ -44,6 +44,8 @@ Remotely play on a **Sega Mega Drive / Genesis** with a ***6‑button controll
 | Z      | 24      | U2‑7   | Z             |
 | Mode   | 25      | U2‑8   | Mode          |
 
+<center><img src="[https://github.com/zLade/megadrive-remote-play/blob/main/images/mapping.png]" width="512" height="256"></center>
+
 
 ---
 
@@ -53,6 +55,8 @@ Remotely play on a **Sega Mega Drive / Genesis** with a ***6‑button controll
 2. Lightly scrape the solder mask where necessary.
 3. Tin each pad and solder a thin wire—**one per button plus one common GND**.
 4. Route the wires out through a strain‑relieved hole.
+
+<center><img src="[https://github.com/zLade/megadrive-remote-play/blob/main/images/gpio-breadboard-pcb.png]" width="512" height="256"></center>
 
 ---
 
@@ -104,6 +108,11 @@ sudo node server.js
 ## Web Interface
 
 It's use the native Gamepad API from modern web browser so it will automaticaly detect your controller
+
+<center><img src="[https://github.com/zLade/megadrive-remote-play/blob/main/images/web-interface-mapping.png]" width="512" height="256"></center>
+<center><img src="[https://github.com/zLade/megadrive-remote-play/blob/main/images/web-interface-controller.png]" width="512" height="256"></center>
+
+
 
 ## Roadmap
 
