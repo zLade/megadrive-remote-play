@@ -29,19 +29,19 @@ Remotely play on a **Sega Mega Drive / Genesis** with a **6‑button controlle
 
 ### Pin Map (default)
 
-| Button | Pi GPIO | Pi Pin| ULN IN | ULN OUT → Pad |
+| Button | Pi GPIO | Pi Pin| ULN IN  | ULN OUT → Pad |
 | ------ | ------- | ------ | ------ | ------------- |
 | Up     | 4       | 7      | U1‑1   | Up            |
 | Down   | 17      | 11     | U1‑2   | Down          |
 | Left   | 27      | 13     | U1‑3   | Left          |
 | Right  | 22      | 15     | U1‑4   | Right         |
-| X      | 23      | 16     | U2‑1   | A             |
-| Y      | 24      | 18     | U2‑2   | B             |
-| Z      | 25      | 22     | U2‑3   | C             |
-| A      | 5       | 29     | U2‑4   | Start         |
-| B      | 6       | 31     | U2‑5   | X             |
-| C      | 13      | 33     | U2‑6   | Y             |
-| Start  | 16      | 36     | U2‑7   | Z             |
+| X      | 23      | 16     | U2‑1   | X             |
+| Y      | 24      | 18     | U2‑2   | Y             |
+| Z      | 25      | 22     | U2‑3   | Z             |
+| A      | 5       | 29     | U2‑4   | A             |
+| B      | 6       | 31     | U2‑5   | B             |
+| C      | 13      | 33     | U2‑6   | C             |
+| Start  | 16      | 36     | U2‑7   | Start         |
 | Mode   | 26      | 37     | U2‑8   | Mode          |
 
 <center><img src="https://raw.githubusercontent.com/zLade/megadrive-remote-play/refs/heads/main/images/mapping.png" width="512" height="256"></center>
