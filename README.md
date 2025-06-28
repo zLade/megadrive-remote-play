@@ -44,7 +44,7 @@ Remotely play on a **Sega Mega Drive / Genesis** with a ***6‑button controll
 | Z      | 24      | U2‑7   | Z             |
 | Mode   | 25      | U2‑8   | Mode          |
 
-<center><img src="[https://github.com/zLade/megadrive-remote-play/blob/main/images/mapping.png]" width="512" height="256"></center>
+<center><img src="https://raw.githubusercontent.com/zLade/megadrive-remote-play/refs/heads/main/images/mapping.png" width="512" height="256"></center>
 
 
 ---
