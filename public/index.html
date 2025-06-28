@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>MD Pad - Player 1</title>
+  <style>
+     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+    body {
+      background: #0a0f1e;
+      color: #e0e1dd;
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    h1 {
+      color: #ff0090;
+      text-shadow: 0 0 8px #ff0090;
+    }
+    .hidden { display: none; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 12px; max-width: 400px; margin: 0 auto; }
+    .action-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px; border: 2px solid #00e5ff; border-radius: 8px;
+      background: #101828; cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .action-row.active { background: #1a2933; box-shadow: 0 0 12px #ff0090; }
+    .action-row:hover { box-shadow: 0 0 12px #00e5ff; }
+    .action-name { font-weight: 700; }
+    .map-label { font-family: monospace; color: #00e5ff; }
+    #status, #gp-status, #gp-model { margin: 12px 0; height: 1.4em; }
+    button {
+      background: #202840; color: #e0e1dd;
+      border: 2px solid #00e5ff; border-radius: 6px;
+      padding: 10px 18px; font-size: 16px; cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    #clear, #finish, #remap { margin: 10px 5px 0; }
+    /* Layout MD 6 boutons */
+    #controls { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 24px; max-width: 600px; margin: 20px auto; }
+    .dpad {
+      display: grid;
+      grid-template-areas:
+        ". up ."
+        "left . right"
+        ". down .";
+      grid-template-columns: 60px 60px 60px;
+      grid-template-rows: 60px 60px 60px;
+      gap: 8px;
+    }
+    .dpad button {
+      width:60px; height:60px;
+      background: #101220; border: 2px solid #ff0090;
+      color: #ff0090;
+      transition: box-shadow 0.2s;
+    }
+    .dpad .up { grid-area: up; }
+    .dpad .down { grid-area: down; }
+    .dpad .left { grid-area: left; }
+    .dpad .right { grid-area: right; }
+    .buttons-md {
+      display: grid;
+      grid-template-columns: repeat(3, 80px);
+      grid-template-rows: repeat(2, 80px);
+      gap: 12px;
+      justify-content: start;
+    }
+    .buttons-md button {
+      width:80px; height:80px;
+      background: #101220; border: 2px solid #00e5ff;
+      color: #00e5ff;
+      transition: box-shadow 0.2s;
+    }
+    .start-mode { margin-top: 20px; display: flex; justify-content: center; gap: 24px; }
+	button:hover { background: #101220; box-shadow: 0 0 8px #00e5ff; }
+    button.active, button:active { background: #ff0090; color: #0a0f1e; }
+  </style>
+</head>
+<body>
+  <h1>MD Pad - Player 1</h1>
+
+  <!-- Phase de mapping -->
+  <div id="remap-ui">
+    <p id="gp-model">En attente d'une manette…</p>
+    <p>Cliquez sur l'action, puis appuyez sur un bouton de votre manette.</p>
+    <div class="grid" id="actions"></div>
+    <div id="status"></div>
+    <button id="clear">Effacer mapping</button>
+    <button id="finish" disabled>Terminer et passer en mode jeu</button>
+  </div>
+
+  <!-- Phase de jeu -->
+  <div id="game-ui" class="hidden">
+    <p id="gp-status">Prêt</p>
+    <div id="controls">
+      <div class="dpad">
+        <button class="up button-ui" data-btn="U">↑</button>
+        <button class="left button-ui" data-btn="L">←</button>
+        <button class="right button-ui" data-btn="R">→</button>
+        <button class="down button-ui" data-btn="D">↓</button>
+      </div>
+      <div>
+        <div class="buttons-md">
+          <button class="button-ui" data-btn="X">X</button>
+          <button class="button-ui" data-btn="Y">Y</button>
+          <button class="button-ui" data-btn="Z">Z</button>
+          <button class="button-ui" data-btn="A">A</button>
+          <button class="button-ui" data-btn="B">B</button>
+          <button class="button-ui" data-btn="C">C</button>
+        </div>
+        <div class="start-mode">
+          <button class="button-ui" data-btn="S">Start</button>
+          <button class="button-ui" data-btn="M">Mode</button>
+        </div>
+      </div>
+    </div>
+    <button id="remap">Remapper les boutons</button>
+  </div>
+
+  <script>
+    const ACTIONS = [
+      {code:'U', name:'Up'}, {code:'D', name:'Down'}, {code:'L', name:'Left'}, {code:'R', name:'Right'},
+      {code:'A', name:'A'},  {code:'B', name:'B'},    {code:'C', name:'C'},
+      {code:'X', name:'X'},  {code:'Y', name:'Y'},    {code:'Z', name:'Z'},
+      {code:'S', name:'Start'},{code:'M', name:'Mode'}
+    ];
+    let remap = {}, inv = {}, current = null, playing = false;
+    const actionsDiv = document.getElementById('actions');
+    const statusEl   = document.getElementById('status');
+    const modelEl    = document.getElementById('gp-model');
+    const finishBtn  = document.getElementById('finish');
+    const clearBtn   = document.getElementById('clear');
+
+    // Charger mapping existant
+    try { remap = JSON.parse(localStorage.getItem('mdMap')) || {}; } catch{};
+    for(const k in remap) inv[remap[k]] = k;
+
+    function updateActions(){
+      actionsDiv.innerHTML = '';
+      ACTIONS.forEach(a=>{
+        const row = document.createElement('div');
+        row.className = 'action-row';
+        row.dataset.code = a.code;
+        if(remap[a.code] !== undefined) row.classList.add('active');
+
+        const name = document.createElement('div'); name.className = 'action-name'; name.textContent = a.name;
+        const map  = document.createElement('div'); map.className = 'map-label';
+        map.textContent = remap[a.code]!==undefined? 'Btn '+remap[a.code] : '...';
+
+        row.append(name, map);
+        row.onclick = () => { if(!playing){ current = a.code; statusEl.textContent = 'Mapping '+a.name; }};
+        actionsDiv.appendChild(row);
+      });
+      finishBtn.disabled = Object.keys(remap).length !== ACTIONS.length;
+    }
+    updateActions();
+
+    clearBtn.onclick = ()=>{ remap={},inv={}; localStorage.removeItem('mdMap'); updateActions(); statusEl.textContent='Mapping effacé'; };
+    finishBtn.onclick = ()=>{
+      localStorage.setItem('mdMap', JSON.stringify(remap));
+      document.getElementById('remap-ui').classList.add('hidden');
+      document.getElementById('game-ui').classList.remove('hidden');
+      document.getElementById('gp-status').textContent = modelEl.textContent;
+      playing = true; attachButtons();
+    };
+    document.getElementById('remap').onclick = ()=>{
+      playing = false;
+      document.getElementById('game-ui').classList.add('hidden');
+      document.getElementById('remap-ui').classList.remove('hidden');
+      statusEl.textContent=''; current=null; inv={}; for(const k in remap) inv[remap[k]] = k;
+      updateActions();
+    };
+
+    window.addEventListener('gamepadconnected', e=> modelEl.textContent = 'Manette: '+e.gamepad.id);
+
+    let prevState = {};
+    function pollRemap(){
+      const gp = navigator.getGamepads()[0];
+      if(gp && current){
+        gp.buttons.forEach((b,i)=>{
+          if(b.pressed && !prevState[i]){
+            remap[current]=i; inv[i]=current;
+            statusEl.textContent = 'Mapped '+current+' → Btn '+i;
+            current=null; updateActions();
+          }
+          prevState[i]=b.pressed;
+        });
+      }
+      requestAnimationFrame(pollRemap);
+    }
+    pollRemap();
+
+    function send(ep,b){ if(!playing) return; fetch('/'+ep,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'btn='+b}); }
+
+    function attachButtons(){
+      document.querySelectorAll('.button-ui').forEach(btn=>{
+        const b=btn.dataset.btn;
+        btn.addEventListener('mousedown',()=>{btn.classList.add('active'); send('down',b);});
+        btn.addEventListener('mouseup',  ()=>{btn.classList.remove('active'); send('up',b);});
+        btn.addEventListener('mouseleave',()=>{btn.classList.remove('active'); send('up',b);});
+        btn.addEventListener('touchstart', ()=>{btn.classList.add('active'); send('down',b);});
+        btn.addEventListener('touchend',   ()=>{btn.classList.remove('active'); send('up',b);});
+      });
+      // gamepad loop
+      const loop=()=>{
+        const gp=navigator.getGamepads()[0];
+        if(gp && playing){
+          gp.buttons.forEach((b,i)=>{
+            const act=inv[i]; if(!act) return;
+            const el=document.querySelector(`.button-ui[data-btn="${act}"]`);
+            if(b.pressed && !prevState[i]){ el.classList.add('active'); send('down',act); }
+            if(!b.pressed && prevState[i]) { el.classList.remove('active'); send('up',act); }
+            prevState[i]=b.pressed;
+          });
+        }
+        requestAnimationFrame(loop);
+      };
+      loop();
+    }
+  </script>
+</body>
+</html>
