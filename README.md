@@ -94,6 +94,17 @@ The ULN’s diodes & high current rating protect the Pi from mistakes or inducti
 
 ---
 
+## How to launch it
+
+After installation, connect with SSH on your Raspberry Pi and use
+```
+sudo node server.js
+```
+
+## Web Interface
+
+It's use the native Gamepad API from modern web browser so it will automaticaly detect your controller
+
 ## Roadmap
 
 * [ ] Support for SNES/Neo‑Geo (different wiring)
